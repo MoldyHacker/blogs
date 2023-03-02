@@ -4,6 +4,7 @@
     <h4>Add Blog</h4>
 </div>
 <form method="post">
+    <div asp-validation-summary="All"></div>
     <label asp-for="@Model.Name">Enter Url</label>
     <input asp-for="@Model.Name" placeholder="Blog Name" />
     <button type="submit">Create</button>
