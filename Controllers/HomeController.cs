@@ -10,6 +10,7 @@ public class HomeController : Controller
     public IActionResult Index() => View(_dataContext.Blogs.OrderBy(b => b.Name));
     [Authorize(Roles = "blogs-moderate")]
     public IActionResult AddBlog() => View();
+
     [Authorize(Roles = "blogs-moderate")]
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -40,6 +41,8 @@ public class HomeController : Controller
         blog = _dataContext.Blogs.FirstOrDefault(b => b.BlogId == id),
         Posts = _dataContext.Posts.Where(p => p.BlogId == id)
     });
+
+    [Authorize(Roles = "blogs-moderate, blogs-admin, northwind-customer")]
     public IActionResult AddPost(int id)
     {
         ViewBag.BlogId = id;
@@ -60,6 +63,7 @@ public class HomeController : Controller
         return View();
     }
 
+    [Authorize(Roles = "blogs-moderate")]
     public IActionResult DeletePost(int id)
     {
         Post post = _dataContext.Posts.FirstOrDefault(p => p.PostId == id);
