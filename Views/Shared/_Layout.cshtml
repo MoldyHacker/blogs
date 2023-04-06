@@ -13,6 +13,11 @@
 <body>
     <div class="container">
         @RenderBody()
+        @if (User?.Identity?.IsAuthenticated ?? false)
+        {
+            <hr />
+            <a asp-controller="Account" asp-action="Logout">Logout</a>
+        }
     </div>
     <!-- jquery -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
